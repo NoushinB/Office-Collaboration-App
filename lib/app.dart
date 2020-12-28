@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mulki_zerin/src/pages/home/home_page.dart';
 import 'package:mulki_zerin/src/pages/login/login_page.dart';
 
 import 'core/app_colors.dart';
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: generateMaterialColor(AppColors.primaryColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      //home: MyHomePage(),
       home: LoginPage(),
     );
   }

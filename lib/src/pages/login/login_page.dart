@@ -1,8 +1,7 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mulki_zerin/core/app_asstes.dart';
 import 'package:mulki_zerin/core/app_colors.dart';
 import 'package:mulki_zerin/src/bloc/blocs/login/login_bloc.dart';
 import 'package:mulki_zerin/src/bloc/events/login_event.dart';
@@ -11,6 +10,7 @@ import 'package:mulki_zerin/src/di/get_it_service_locator.dart';
 import 'package:mulki_zerin/src/enums/enums.dart';
 import 'package:mulki_zerin/src/pages/home/home_page.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
+import 'package:mulki_zerin/src/widgets/busy_indicator.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,14 +21,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _loginFormKey = GlobalKey<FormState>();
-
   var _txtUserNameController = TextEditingController();
   var _txtPasswordController = TextEditingController();
-
-  var _netState = NetState.UNINITIALIZED;
-
   LoginBloc _loginBloc;
   LocalStorageService _storageService;
+
+  var test = 1;
 
   @override
   void initState() {
@@ -53,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
@@ -60,123 +59,120 @@ class _LoginPageState extends State<LoginPage> {
         body: BlocListener(
           bloc: _loginBloc,
           listener: (BuildContext context, LoginState state) {
-            if(state is LoginSuccess){
+            if (state is LoginSuccess) {
               _storageService.accessToken = state.result.accessToken;
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             }
           },
           child: Form(
-              key: _loginFormKey,
-              child: BlocBuilder(
-                bloc: _loginBloc,
-                builder: (BuildContext context, LoginState state){
-                  return Container(
-                    padding: EdgeInsets.all(40),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8),
-                        Text("Login",
-                            style:
-                            TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-                        SizedBox(height: 90),
-                        Container(
-                          child: Card(
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                                  child: TextFormField(
-                                    controller: _txtUserNameController,
-                                    enabled: !(state is LoginLoading),
-                                    decoration: InputDecoration(
+            key: _loginFormKey,
+            child: BlocBuilder(
+              bloc: _loginBloc,
+              builder: (BuildContext context, LoginState state) {
+                return Container(
+                  padding: EdgeInsets.all(40),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 8),
+                      Container(
+                        height: height / 4,
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.asset(AppAssets.one),
+                      ),
+                      SizedBox(height: 32),
+                      Text("Login", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.secondaryColor)),
+                      SizedBox(height: 16),
+                      Container(
+                        child: Card(
+                          elevation: 2.0,
+                          color: AppColors.lightPrimaryColor,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                child: TextFormField(
+                                  controller: _txtUserNameController,
+                                  enabled: !(state is LoginLoading),
+                                  decoration: InputDecoration(
+                                      fillColor: AppColors.primaryColor,
                                       border: InputBorder.none,
                                       focusedBorder: InputBorder.none,
                                       enabledBorder: InputBorder.none,
                                       errorBorder: InputBorder.none,
                                       disabledBorder: InputBorder.none,
-                                      icon: Icon(Icons.person_outline_outlined),
+                                      icon: Icon(
+                                        Icons.person_outline_outlined,
+                                        color: AppColors.darkPrimaryColor,
+                                      ),
                                       labelText: 'UserName/Email',
-                                    ),
-                                    validator: (value) {
-                                      if(value.isEmpty){
-                                        return "Username is required";
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      labelStyle: TextStyle(color: AppColors.darkPrimaryColor)),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "Username is required";
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                Divider(thickness: 2),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                                  child: TextFormField(
-                                    controller: _txtPasswordController,
-                                    enabled: !(state is LoginLoading),
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      icon: Icon(Icons.lock_outline),
-                                      labelText: 'Password',
-                                    ),
-                                    validator: (value) {
-                                      if(value.isEmpty){
-                                        return "Password is required";
-                                      }
-                                      return null;
-                                    },
+                              ),
+                              Divider(thickness: 2),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                child: TextFormField(
+                                  controller: _txtPasswordController,
+                                  enabled: !(state is LoginLoading),
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    focusColor: AppColors.primaryColor,
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    icon: Icon(Icons.lock_outline, color: AppColors.darkPrimaryColor),
+                                    labelText: 'Password',
+                                    labelStyle: TextStyle(color: AppColors.darkPrimaryColor),
                                   ),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "Password is required";
+                                    }
+                                    return null;
+                                  },
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 16),
-                        Center(
-                          child: PrimaryButton(
-                            text: state is LoginLoading ? "Please Wait" : "Login",
-                            onPressed: () {
-                              if (_loginFormKey.currentState.validate()) {
-                                var username = _txtUserNameController.text;
-                                var password = _txtPasswordController.text;
-                                _loginBloc.add(Login(username, password));
-                              } else {
-                                setState(() {
-                                  _netState = NetState.UNINITIALIZED;
-                                });
-                              }
-                            },
+                      ),
+                      SizedBox(height: 16),
+                      Center(
+                        child: PrimaryButton(
+                          child: state is LoginLoading ? BusyIndicator() : Text('Login', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.lightPrimaryColor, fontSize: 16)),
+                          onPressed: () {
+                            if (_loginFormKey.currentState.validate()) {
+                              var username = _txtUserNameController.text;
+                              var password = _txtPasswordController.text;
+                              _loginBloc.add(Login(username, password));
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 70, left: 30, right: 30),
+                        child: Center(
+                          child: RichText(
+                            text: TextSpan(text: "Don’t have an account?", style: TextStyle(color: AppColors.secondaryColor, fontSize: 18, height: 1.5), children: <TextSpan>[TextSpan(text: ' Create a new account', style: TextStyle(color: AppColors.darkPrimaryColor, fontSize: 18))]),
                           ),
                         ),
-                        Padding(
-                          padding:
-                          const EdgeInsets.only(top: 70, left: 30, right: 30),
-                          child: Center(
-                            child: RichText(
-                              text: TextSpan(
-                                  text: "Don’t have an account?",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18, height: 1.5),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: ' Create a new account',
-                                        style: TextStyle(
-                                            color: AppColors.darkPrimaryColor,
-                                            fontSize: 18))
-                                  ]),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              )
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
