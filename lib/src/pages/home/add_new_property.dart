@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:mulki_zerin/core/app_colors.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
 import 'package:mulki_zerin/src/widgets/card/take_image.dart';
 import 'package:mulki_zerin/src/widgets/card/text_form.dart';
 
-class AddNewHouse extends StatefulWidget {
+class AddNewProperty extends StatefulWidget {
   @override
-  _AddNewHouseState createState() => _AddNewHouseState();
+  _AddNewPropertyState createState() => _AddNewPropertyState();
 }
 
-class _AddNewHouseState extends State<AddNewHouse> {
+class _AddNewPropertyState extends State<AddNewProperty> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        title: Text("Add New Property",style: TextStyle(color: AppColors.darkPrimaryColor),),
+      ),
+      body: Container(
         color: Colors.white,
         padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Form(
             child: Column(
               children: [
-                SizedBox(height: 12),
+                TakeImage(),
                 TextForm(Icons.add_location_alt_outlined,"شوین"),
                 SizedBox(height: 12),
                 TextForm(Icons.merge_type,"جوری مولک"),
@@ -64,14 +70,10 @@ class _AddNewHouseState extends State<AddNewHouse> {
                 SizedBox(height: 12),
                 TextForm(Icons.camera_enhance_rounded,"تیبینی زیاتر"),
                 SizedBox(height: 12),
-                TakeImage(),
                 SizedBox(height: 12),
                 PrimaryButton(child: Text("زیادکردن"),
                     onPressed: (){}),
-
                 SizedBox(height: 12)
-
-
               ],
             ),
           ),

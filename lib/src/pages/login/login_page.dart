@@ -7,7 +7,6 @@ import 'package:mulki_zerin/src/bloc/blocs/login/login_bloc.dart';
 import 'package:mulki_zerin/src/bloc/events/login_event.dart';
 import 'package:mulki_zerin/src/bloc/states/login/login_state.dart';
 import 'package:mulki_zerin/src/di/get_it_service_locator.dart';
-import 'package:mulki_zerin/src/enums/enums.dart';
 import 'package:mulki_zerin/src/pages/home/home_page.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/busy_indicator.dart';

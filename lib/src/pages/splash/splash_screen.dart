@@ -32,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
                     Card(
                       child: Center(
                         child: Container(

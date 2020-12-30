@@ -19,7 +19,7 @@ class _SearchFragmentState extends State<SearchFragment> {
           child: Column(
             children: [
               SizedBox(height: 24,),
-                TextFieldSearch(),
+              TextFieldSearch(),
               SizedBox(height: 16,),
               HouseItemWidget(),
 
