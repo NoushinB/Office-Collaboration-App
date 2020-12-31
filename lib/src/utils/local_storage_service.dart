@@ -1,8 +1,12 @@
+import 'dart:convert';
+
+import 'package:mulki_zerin/src/models/user/user_profile_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageService {
   static const String AccessToken = "access_token";
   static const String RefreshToken = "refresh_token";
+  static const String CurrentUserData = "current_user";
   static const String AppLanguageKey = 'current_language';
   static const String FirebaseInstanceId = "fcm_token";
   static const String NotificationsCount = "notifications_count";
@@ -30,6 +34,24 @@ class LocalStorageService {
   String get refreshToken => _getFromDisk(RefreshToken);
 
   set refreshToken(String value) => _saveToDisk(RefreshToken, value);
+
+  UserProfileDataModel get currentUser {
+    String dataString = _getFromDisk(CurrentUserData);
+    try {
+      return UserProfileDataModel.fromJson(json.decode(dataString));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  set currentUser(UserProfileDataModel user) {
+    if (user == null) {
+      _saveToDisk(CurrentUserData, "");
+    } else {
+      var dataJson = json.encode(user.toJson());
+      _saveToDisk(CurrentUserData, dataJson);
+    }
+  }
 
   // Language Code
   String get languageCode => _getFromDisk(AppLanguageKey);

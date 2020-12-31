@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mulki_zerin/src/pages/home/profile_settings.dart';
-
+import 'package:mulki_zerin/src/pages/login/login_page.dart';
 import 'core/app_colors.dart';
 
 class MyApp extends StatelessWidget {
@@ -16,8 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: generateMaterialColor(AppColors.primaryColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-     // home: LoginPage(),
-      home: ProfileSetting(),
+      home: LoginPage(),
     );
   }
 
@@ -38,17 +36,9 @@ class MyApp extends StatelessWidget {
 
   int tintValue(int value, double factor) => max(0, min((value + ((255 - value) * factor)).round(), 255));
 
-  Color tintColor(Color color, double factor) => Color.fromRGBO(
-      tintValue(color.red, factor),
-      tintValue(color.green, factor),
-      tintValue(color.blue, factor),
-      1);
+  Color tintColor(Color color, double factor) => Color.fromRGBO(tintValue(color.red, factor), tintValue(color.green, factor), tintValue(color.blue, factor), 1);
 
   int shadeValue(int value, double factor) => max(0, min(value - (value * factor).round(), 255));
 
-  Color shadeColor(Color color, double factor) => Color.fromRGBO(
-      shadeValue(color.red, factor),
-      shadeValue(color.green, factor),
-      shadeValue(color.blue, factor),
-      1);
+  Color shadeColor(Color color, double factor) => Color.fromRGBO(shadeValue(color.red, factor), shadeValue(color.green, factor), shadeValue(color.blue, factor), 1);
 }

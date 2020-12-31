@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mulki_zerin/core/app_colors.dart';
+import 'package:mulki_zerin/src/models/user/user_profile_data.dart';
+import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
 
 import 'add_new_property.dart';
@@ -13,6 +15,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  LocalStorageService _storageService;
+
+  UserProfileDataModel currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchInitData();
+  }
+
+  _fetchInitData() async {
+    try {
+      _storageService = await LocalStorageService.getInstance();
+      setState(() {
+        currentUser = _storageService.currentUser;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,9 +160,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16.0,right: 16.0),
-            child: PrimaryButton(child: Center(child: Text("زیادکردن", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0,color: Colors.white),)),
-                onPressed: (){
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            child: PrimaryButton(child: Center(child: Text("زیادکردن", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),)),
+                onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewProperty()));
                 }),
           ),
@@ -211,8 +235,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Container _buildHeader() {
     return Container(
-
-
       padding: const EdgeInsets.fromLTRB(0, 50.0, 0, 32.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -220,7 +242,6 @@ class _MyHomePageState extends State<MyHomePage> {
           bottomRight: Radius.circular(20.0),
         ),
         color: AppColors.lightPrimaryColor,
-
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,13 +253,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             trailing: CircleAvatar(
               radius: 25.0,
+              backgroundImage: NetworkImage(currentUser != null ? currentUser.avatarUrl : ""),
+              backgroundColor: Colors.transparent,
             ),
           ),
           const SizedBox(height: 10.0),
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Text(
-              "Dr. John Doe",
+              currentUser != null ? currentUser.fullName : "",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: AppColors.darkPrimaryColor),
             ),
           ),
@@ -246,7 +269,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Text(
-              "Md, (General Medium), DM\n(Cardiology)",
+              currentUser != null ? currentUser.userName : "",
               style: TextStyle(color: AppColors.darkPrimaryColor),
             ),
           ),
@@ -268,8 +291,8 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Icon(
-            icon,
-            color: Colors.white,
+              icon,
+              color: Colors.white
           ),
           Text(
             title,

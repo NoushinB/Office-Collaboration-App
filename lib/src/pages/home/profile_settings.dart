@@ -41,7 +41,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.nightlight_round),
               onPressed: () {
                 setState(() {
                   _dark = !_dark;
@@ -59,7 +59,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Card(
-                    elevation: 8.0,
+                    elevation: 2.0,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                     color: AppColors.darkPrimaryColor,
                     child: ListTile(
@@ -82,8 +82,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   ),
                   const SizedBox(height: 10.0),
                   Card(
-                    elevation: 4.0,
-                    margin: const EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 16.0),
+                    elevation: 2.0,
+                    margin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                     child: Column(
                       children: <Widget>[
