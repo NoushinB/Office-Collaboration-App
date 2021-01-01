@@ -92,18 +92,17 @@ class _LoginPageState extends State<LoginPage> {
                 bloc: _loginBloc,
                 builder: (BuildContext context, LoginState state) {
                   return Container(
-                    padding: EdgeInsets.all(40),
+                    padding: EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 8),
                         Container(
-                          height: height / 4,
+                          height: height / 5,
                           width: MediaQuery.of(context).size.width,
-                          child: Image.asset(AppAssets.one),
+                          child: Image.asset(AppAssets.appLogo),
                         ),
-                        SizedBox(height: 32),
-                        Text("Login", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.secondaryColor)),
+                        SizedBox(height: 16),
+                        Center(child: Text("Login", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.secondaryColor))),
                         SizedBox(height: 16),
                         Container(
                           child: Card(
@@ -180,14 +179,6 @@ class _LoginPageState extends State<LoginPage> {
                                 _loginBloc.add(Login(username, password));
                               }
                             },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 70, left: 30, right: 30),
-                          child: Center(
-                            child: RichText(
-                              text: TextSpan(text: "Don’t have an account?", style: TextStyle(color: AppColors.secondaryColor, fontSize: 18, height: 1.5), children: <TextSpan>[TextSpan(text: ' Create a new account', style: TextStyle(color: AppColors.darkPrimaryColor, fontSize: 18))]),
-                            ),
                           ),
                         ),
                       ],

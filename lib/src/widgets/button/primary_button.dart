@@ -3,14 +3,15 @@ import 'package:mulki_zerin/core/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   final Widget child;
+  final double height;
   final VoidCallback onPressed;
 
-  PrimaryButton({@required this.child, this.onPressed});
+  PrimaryButton({@required this.child, this.onPressed, this.height = 48});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48,
+      height: height,
       child: InkWell(
         borderRadius: BorderRadius.all(Radius.circular(6)),
         onTap: () {

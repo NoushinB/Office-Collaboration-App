@@ -1,7 +1,7 @@
 class AppConfig {
   // Api endpoints
-  static const String baseUrl = "http://192.168.1.2:8051";
-  static const String identityBaseUrl = "http://192.168.1.2:8050";
+  static const String baseUrl = "http://192.168.1.5:8051";
+  static const String identityBaseUrl = "http://192.168.1.5:8050";
 
   // Login options
   static const String grantType = "password";

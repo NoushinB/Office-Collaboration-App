@@ -6,7 +6,7 @@ import 'package:mulki_zerin/src/pages/home/profile_settings.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
 
-import 'add_new_property.dart';
+import '../property/add_new_property.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -47,157 +47,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildHeader(),
-          const SizedBox(height: 20.0),
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Text(
-              "Appointments",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-            ),
-          ),
-          Card(
-            elevation: 4.0,
-            color: Colors.white,
-            margin: const EdgeInsets.all(16.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: ListTile(
-                    leading: Container(
-                      alignment: Alignment.bottomCenter,
-                      width: 45.0,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Container(
-                            height: 20,
-                            width: 8.0,
-                            color: Colors.grey.shade300,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Container(
-                            height: 25,
-                            width: 8.0,
-                            color: Colors.grey.shade300,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Container(
-                            height: 40,
-                            width: 8.0,
-                            color: AppColors.secondaryColor,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Container(
-                            height: 30,
-                            width: 8.0,
-                            color: Colors.grey.shade300,
-                          ),
-                        ],
-                      ),
-                    ),
-                    title: Text("Today"),
-                    subtitle: Text("18 patients"),
-                  ),
-                ),
-                VerticalDivider(),
-                Expanded(
-                  child: ListTile(
-                    leading: Container(
-                      alignment: Alignment.bottomCenter,
-                      width: 45.0,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Container(
-                            height: 20,
-                            width: 8.0,
-                            color: Colors.grey.shade300,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Container(
-                            height: 25,
-                            width: 8.0,
-                            color: Colors.grey.shade300,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Container(
-                            height: 40,
-                            width: 8.0,
-                            color: AppColors.errorColor,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Container(
-                            height: 30,
-                            width: 8.0,
-                            color: Colors.grey.shade300,
-                          ),
-                        ],
-                      ),
-                    ),
-                    title: Text("Canceled"),
-                    subtitle: Text("7 patients"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 98,
-            child: Card(
-              elevation: 4.0,
-              color: Colors.white,
-              margin: const EdgeInsets.all(16.0),
-              child: Row(
-                children: <Widget>[Text("filter")],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-            child: PrimaryButton(
-                child: Center(
-                    child: Text(
-                  "زیادکردن",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
-                )),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewProperty()));
-                }),
-          ),
-          SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: _buildTile(
-                    color: AppColors.lightPrimaryColor,
-                    icon: Icons.portrait,
-                    title: "Number of Patient",
-                    data: "1200",
-                  ),
-                ),
-                const SizedBox(width: 16.0),
-                Expanded(
-                  child: _buildTile(
-                    color: AppColors.primaryColor,
-                    icon: Icons.portrait,
-                    title: "Admitted",
-                    data: "857",
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16.0),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildHeader(),
+            SizedBox(height: 12),
+            Row(
               children: <Widget>[
                 Expanded(
                   child: _buildTile(
@@ -227,9 +84,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: 20.0),
-        ],
+            SizedBox(height: 12),
+            PrimaryButton(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add, size: 32, color: Colors.white),
+                    SizedBox(width: 8),
+                    Text(
+                      "Add New Property",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
+                    )
+                  ],
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewProperty()));
+                }),
+          ],
+        ),
       ),
     );
   }
@@ -250,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ListTile(
             title: Text(
               "Mulki Zerin",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: AppColors.darkPrimaryColor),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0, color: AppColors.darkPrimaryColor),
             ),
             trailing: InkWell(
               child: CircleAvatar(
@@ -296,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Icon(icon, color: Colors.white),
+          Icon(icon, color: AppColors.darkPrimaryColor),
           Text(
             title,
             style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.darkPrimaryColor),

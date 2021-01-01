@@ -41,6 +41,9 @@ dependencies:
   cached_network_image: ^2.3.3
   curved_navigation_bar: ^0.3.4
   flutter_spinkit: ^4.1.2
+  permission: ^0.1.7
+  image_picker: ^0.6.7+17
+  connectivity: ^2.0.2
 
 dev_dependencies:
   flutter_test:

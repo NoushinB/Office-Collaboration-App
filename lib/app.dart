@@ -1,14 +1,20 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mulki_zerin/src/enums/enums.dart';
 import 'package:mulki_zerin/src/pages/login/login_page.dart';
+import 'package:mulki_zerin/src/utils/connectivity_service.dart';
+import 'package:provider/provider.dart';
 import 'core/app_colors.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return StreamProvider<ConnectivityStatus>(
+      create: (context) => ConnectivityService().connectionStatusController.stream,
+      child: MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         accentColor: AppColors.secondaryColor,
@@ -16,7 +22,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: LoginPage(),
-    );
+    ));
   }
 
   MaterialColor generateMaterialColor(Color color) {
