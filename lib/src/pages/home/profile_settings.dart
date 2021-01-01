@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:mulki_zerin/core/app_colors.dart';
+import 'package:mulki_zerin/src/models/user/user_profile_data.dart';
+import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 
 class ProfileSetting extends StatefulWidget {
-
-
   @override
   _ProfileSettingState createState() => _ProfileSettingState();
 }
 
 class _ProfileSettingState extends State<ProfileSetting> {
+  LocalStorageService _storageService;
+  UserProfileDataModel currentUser;
+
   bool _dark;
 
   @override
   void initState() {
     super.initState();
     _dark = false;
+    _fetchInitData();
+  }
+
+  _fetchInitData() async {
+    try {
+      _storageService = await LocalStorageService.getInstance();
+      setState(() {
+        currentUser = _storageService.currentUser;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Brightness _getBrightness() {
@@ -67,13 +82,17 @@ class _ProfileSettingState extends State<ProfileSetting> {
                         //open edit profile
                       },
                       title: Text(
-                        "John Doe",
+                        currentUser != null ? currentUser.fullName : "Guest",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      leading: CircleAvatar(backgroundColor: AppColors.lightPrimaryColor),
+                      leading: CircleAvatar(
+                        radius: 25.0,
+                        backgroundImage: NetworkImage(currentUser != null ? currentUser.avatarUrl : ""),
+                        backgroundColor: Colors.transparent,
+                      ),
                       trailing: Icon(
                         Icons.edit,
                         color: Colors.white,
@@ -96,7 +115,10 @@ class _ProfileSettingState extends State<ProfileSetting> {
                             "Change Password",
                             style: TextStyle(color: AppColors.darkPrimaryColor),
                           ),
-                          trailing: Icon(Icons.keyboard_arrow_right,color: AppColors.darkPrimaryColor,),
+                          trailing: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.darkPrimaryColor,
+                          ),
                           onTap: () {
                             //open change password
                           },
@@ -107,8 +129,14 @@ class _ProfileSettingState extends State<ProfileSetting> {
                             Icons.language,
                             color: AppColors.darkPrimaryColor,
                           ),
-                          title: Text("Change Language",style: TextStyle(color: AppColors.darkPrimaryColor),),
-                          trailing: Icon(Icons.keyboard_arrow_right,color: AppColors.darkPrimaryColor,),
+                          title: Text(
+                            "Change Language",
+                            style: TextStyle(color: AppColors.darkPrimaryColor),
+                          ),
+                          trailing: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.darkPrimaryColor,
+                          ),
                           onTap: () {
                             //open change language
                           },
@@ -119,8 +147,14 @@ class _ProfileSettingState extends State<ProfileSetting> {
                             Icons.location_on,
                             color: AppColors.darkPrimaryColor,
                           ),
-                          title: Text("Change Location",style: TextStyle(color: AppColors.darkPrimaryColor),),
-                          trailing: Icon(Icons.keyboard_arrow_right,color: AppColors.darkPrimaryColor,),
+                          title: Text(
+                            "Change Location",
+                            style: TextStyle(color: AppColors.darkPrimaryColor),
+                          ),
+                          trailing: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.darkPrimaryColor,
+                          ),
                           onTap: () {
                             //open change location
                           },
@@ -151,7 +185,6 @@ class _ProfileSettingState extends State<ProfileSetting> {
                     title: Text("Received newsletter"),
                     onChanged: null,
                   ),
-
                   const SizedBox(height: 60.0),
                 ],
               ),

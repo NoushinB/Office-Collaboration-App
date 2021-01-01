@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mulki_zerin/core/app_colors.dart';
 import 'package:mulki_zerin/src/models/user/user_profile_data.dart';
+import 'package:mulki_zerin/src/pages/home/profile_settings.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
 
@@ -15,7 +16,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   LocalStorageService _storageService;
 
   UserProfileDataModel currentUser;
@@ -148,25 +148,26 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             height: 98,
             child: Card(
-
               elevation: 4.0,
               color: Colors.white,
               margin: const EdgeInsets.all(16.0),
               child: Row(
-                children: <Widget>[
-                  Text("filter")
-                ],
+                children: <Widget>[Text("filter")],
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-            child: PrimaryButton(child: Center(child: Text("زیادکردن", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),)),
+            child: PrimaryButton(
+                child: Center(
+                    child: Text(
+                  "زیادکردن",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
+                )),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewProperty()));
                 }),
           ),
-
           SizedBox(height: 12),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -251,10 +252,15 @@ class _MyHomePageState extends State<MyHomePage> {
               "Mulki Zerin",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: AppColors.darkPrimaryColor),
             ),
-            trailing: CircleAvatar(
-              radius: 25.0,
-              backgroundImage: NetworkImage(currentUser != null ? currentUser.avatarUrl : ""),
-              backgroundColor: Colors.transparent,
+            trailing: InkWell(
+              child: CircleAvatar(
+                radius: 25.0,
+                backgroundImage: NetworkImage(currentUser != null ? currentUser.avatarUrl : ""),
+                backgroundColor: Colors.transparent,
+              ),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetting()));
+              },
             ),
           ),
           const SizedBox(height: 10.0),
@@ -290,10 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Icon(
-              icon,
-              color: Colors.white
-          ),
+          Icon(icon, color: Colors.white),
           Text(
             title,
             style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.darkPrimaryColor),
