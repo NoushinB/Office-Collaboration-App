@@ -4,6 +4,7 @@ import 'package:mulki_zerin/src/bloc/blocs/category/categories_list_bloc.dart';
 import 'package:mulki_zerin/src/bloc/blocs/login/login_bloc.dart';
 import 'package:mulki_zerin/src/bloc/blocs/place/places_list_bloc.dart';
 import 'package:mulki_zerin/src/bloc/blocs/property/create_property_bloc.dart';
+import 'package:mulki_zerin/src/bloc/blocs/property/property_list_bloc.dart';
 import 'package:mulki_zerin/src/bloc/blocs/user/user_profile_data_bloc.dart';
 import 'package:mulki_zerin/src/resources/api_provider/category_api_provider.dart';
 import 'package:mulki_zerin/src/resources/api_provider/login_api_provider.dart';
@@ -43,4 +44,5 @@ void setupLocator() {
   getIt.registerFactory<CreatePropertyBloc>(() => CreatePropertyBloc());
   getIt.registerFactory<PlacesListBloc>(() => PlacesListBloc());
   getIt.registerFactory<CategoriesListBloc>(() => CategoriesListBloc());
+  getIt.registerFactory<PropertyListBloc>(() => PropertyListBloc());
 }

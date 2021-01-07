@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mulki_zerin/core/app_colors.dart';
+import 'package:mulki_zerin/core/app_asstes.dart';
 import 'package:mulki_zerin/src/models/user/user_profile_data.dart';
 import 'package:mulki_zerin/src/pages/home/profile_settings.dart';
+import 'package:mulki_zerin/src/pages/home/property_list.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
+import 'package:mulki_zerin/src/widgets/button/secondary_button.dart';
+import 'package:mulki_zerin/src/widgets/card/card_list.dart';
 
 import '../property/add_new_property.dart';
 
@@ -39,26 +43,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: _buildBody(context),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: _buildBody(context),
+      ),
     );
   }
 
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildHeader(),
-            SizedBox(height: 12),
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _buildHeader(),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
               children: <Widget>[
                 Expanded(
                   child: _buildTile(
-                    color: AppColors.primaryColor,
+                    color: AppColors.lightPrimaryColor,
                     icon: Icons.favorite,
                     title: "Discharged",
                     data: "864",
@@ -67,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(width: 16.0),
                 Expanded(
                   child: _buildTile(
-                    color: AppColors.lightPrimaryColor,
+                    color: AppColors.primaryColor,
                     icon: Icons.portrait,
                     title: "Dropped",
                     data: "857",
@@ -76,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(width: 16.0),
                 Expanded(
                   child: _buildTile(
-                    color: AppColors.primaryColor,
+                    color: AppColors.lightPrimaryColor,
                     icon: Icons.favorite,
                     title: "Arrived",
                     data: "698",
@@ -84,38 +90,93 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 12),
-            PrimaryButton(
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: PrimaryButton(
                 height: 60,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Text("Add New Property", style: TextStyle( fontSize: 18.0, color: Colors.white)),
+                    ),
                     Icon(Icons.add, size: 32, color: Colors.white),
-                    SizedBox(width: 8),
-                    Text(
-                      "Add New Property",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
-                    )
-                  ],
+                    ],
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewProperty()));
                 }),
-          ],
-        ),
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SecondaryButton(
+                height: 60,
+                child: Row(
+                  children: [
+                    SizedBox(width: 16),
+                    Expanded(child: Text("My Properties", style: TextStyle( fontSize: 18.0))),
+                    Icon(Icons.arrow_forward_ios, size: 28), ],
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyPropertyList()));
+                }),
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Recently Property",
+              style: TextStyle(fontSize: 22),
+            ),
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Card(
+              color: AppColors.lightPrimaryColor,
+              elevation: 1,
+              child: Row(
+                children: [
+                  Container(
+                    child: Image.asset(AppAssets.appLogo),
+                    height: 80,
+                    width: 120,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: CardList(),
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: CardList(),
+          )
+        ],
       ),
     );
   }
 
   Container _buildHeader() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(0, 50.0, 0, 32.0),
+      padding: const EdgeInsets.fromLTRB(0, 24.0, 0, 32.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(20.0),
           bottomRight: Radius.circular(20.0),
         ),
-        color: AppColors.lightPrimaryColor,
+        color: AppColors.primaryColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
       padding: const EdgeInsets.all(8.0),
       height: 150.0,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(6.0),
         color: color,
       ),
       child: Column(

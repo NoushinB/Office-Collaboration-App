@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mulki_zerin/core/app_colors.dart';
 import 'package:mulki_zerin/src/bloc/blocs/place/places_list_bloc.dart';
 import 'package:mulki_zerin/src/bloc/events/place_event.dart';
 import 'package:mulki_zerin/src/bloc/states/place/places_list_state.dart';
@@ -52,10 +53,15 @@ class _PlacesListPageState extends State<PlacesListPage> with TickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Places"),
+        elevation: 0,
+        brightness: Brightness.light,
+        iconTheme: IconThemeData(color: AppColors.darkPrimaryColor),
+        backgroundColor: Colors.white,
         centerTitle: true,
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black),
+        title: Text(
+          "Places",
+          style: TextStyle(color: AppColors.darkPrimaryColor),
+        ),
       ),
       body: Container(
         key: key,

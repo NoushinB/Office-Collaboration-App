@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:async/async.dart';
 import 'package:mulki_zerin/core/app_config.dart';
 import 'package:mulki_zerin/src/di/get_it_service_locator.dart';
+import 'package:mulki_zerin/src/error_handling/error_handling_helper.dart';
 import 'package:mulki_zerin/src/models/property/create_property_model.dart';
+import 'package:mulki_zerin/src/models/property/properties_list_result.dart';
+import 'package:mulki_zerin/src/models/property/property_filter_model.dart';
 import 'package:path/path.dart';
 
 class PropertyApiProvider {
@@ -55,4 +57,21 @@ class PropertyApiProvider {
       throw Exception('Failed To Create New Order');
     }
   }
+
+  Future<PropertiesListResult> fetchPropertiesListAsync(String accessToken, PropertyFilterModel filterModel, int page) async {
+    var  url = "${AppConfig.baseUrl}/api/mulkizerin/property/list?page=$page";
+    var filterBody = json.encode(filterModel.toJson());
+    http.Response response = await client.post(
+      url,
+      headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.authorizationHeader: "Bearer $accessToken",
+      },
+      body: filterBody
+    );
+    ErrorHandlingHelper.ensureSuccessResponse(response, defaultMsg: 'Failed to load orders');
+    return PropertiesListResult.fromJson(json.decode(response.body));
+  }
 }
+
+

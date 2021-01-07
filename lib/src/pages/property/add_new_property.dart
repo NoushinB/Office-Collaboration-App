@@ -70,6 +70,9 @@ class _AddNewPropertyState extends State<AddNewProperty> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        brightness: Brightness.light,
+        iconTheme: IconThemeData(color: AppColors.darkPrimaryColor),
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           "Add New Property",

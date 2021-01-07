@@ -19,7 +19,7 @@ class TextFormInputSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: 76,
+        height: 68,
         child: Card(
           color: AppColors.lightPrimaryColor,
           elevation: 0.0,
@@ -28,7 +28,7 @@ class TextFormInputSelector extends StatelessWidget {
             side: BorderSide(color: AppColors.lightPrimaryColor, width: 3),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: Row(
               children: [
                 Icon(icon, color: AppColors.darkPrimaryColor),

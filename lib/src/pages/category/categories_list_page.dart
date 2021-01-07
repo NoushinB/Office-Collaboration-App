@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mulki_zerin/core/app_colors.dart';
 import 'package:mulki_zerin/src/bloc/blocs/category/categories_list_bloc.dart';
 import 'package:mulki_zerin/src/bloc/events/category_event.dart';
 import 'package:mulki_zerin/src/bloc/states/category/categories_list_state.dart';
@@ -53,10 +54,15 @@ class _CategoriesListPageState extends State<CategoriesListPage> with TickerProv
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categories"),
+        elevation: 0,
+        brightness: Brightness.light,
+        iconTheme: IconThemeData(color: AppColors.darkPrimaryColor),
+        backgroundColor: Colors.white,
         centerTitle: true,
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black),
+        title: Text(
+          "Categories",
+          style: TextStyle(color: AppColors.darkPrimaryColor),
+        ),
       ),
       body: Container(
         key: key,
