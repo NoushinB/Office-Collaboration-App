@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mulki_zerin/src/enums/enums.dart';
-import 'package:mulki_zerin/src/pages/login/login_page.dart';
+import 'package:mulki_zerin/src/pages/map/map_sample.dart';
 import 'package:mulki_zerin/src/utils/connectivity_service.dart';
 import 'package:provider/provider.dart';
 import 'core/app_colors.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: generateMaterialColor(AppColors.primaryColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
+      home: MapSample(),
     ));
   }
 

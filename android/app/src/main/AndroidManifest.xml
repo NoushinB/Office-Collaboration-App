@@ -10,6 +10,8 @@
         android:label="mulki_zerin"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/launcher_icon">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCX6ckdw60d9z6xLKg4v8zZVMgHK84VS6I"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
