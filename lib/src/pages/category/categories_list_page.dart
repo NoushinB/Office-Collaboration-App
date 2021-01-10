@@ -53,6 +53,7 @@ class _CategoriesListPageState extends State<CategoriesListPage> with TickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,

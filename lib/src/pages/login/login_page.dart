@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Image.asset(AppAssets.appLogo),
                         ),
                         SizedBox(height: 16),
-                        Center(child: Text("Login", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.secondaryColor))),
+                        Center(child: Text("Login", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold))),
                         SizedBox(height: 16),
                         Container(
                           child: Card(

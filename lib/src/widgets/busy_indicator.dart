@@ -7,7 +7,7 @@ class BusyIndicator extends StatelessWidget {
   final double size;
   final bool isInCenter;
 
-  BusyIndicator({this.color = AppColors.secondaryColor, this.size = 24.0, this.isInCenter = true});
+  BusyIndicator({this.color = Colors.black, this.size = 24.0, this.isInCenter = true});
 
   @override
   Widget build(BuildContext context) {

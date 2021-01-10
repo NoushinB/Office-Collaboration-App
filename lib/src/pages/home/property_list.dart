@@ -62,6 +62,7 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0,

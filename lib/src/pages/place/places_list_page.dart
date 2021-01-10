@@ -52,6 +52,7 @@ class _PlacesListPageState extends State<PlacesListPage> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,

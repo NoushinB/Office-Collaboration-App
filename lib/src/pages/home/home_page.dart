@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mulki_zerin/core/app_colors.dart';
-import 'package:mulki_zerin/core/app_asstes.dart';
 import 'package:mulki_zerin/src/models/user/user_profile_data.dart';
 import 'package:mulki_zerin/src/pages/home/profile_settings.dart';
 import 'package:mulki_zerin/src/pages/home/property_list.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
 import 'package:mulki_zerin/src/widgets/button/secondary_button.dart';
-import 'package:mulki_zerin/src/widgets/card/card_list.dart';
+import 'package:mulki_zerin/src/widgets/my_bottom_nav_bar.dart';
 
 import '../property/add_new_property.dart';
 
@@ -47,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: _buildBody(context),
+        bottomNavigationBar: MyBottomNavBar(),
       ),
     );
   }
@@ -117,52 +117,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: [
                     SizedBox(width: 16),
-                    Expanded(child: Text("My Properties", style: TextStyle( fontSize: 18.0))),
-                    Icon(Icons.arrow_forward_ios, size: 28), ],
+                    Expanded(child: Text("My Properties", style: TextStyle( fontSize: 18.0,color: AppColors.darkPrimaryColor))),
+                    Icon(Icons.arrow_forward_ios, size: 28,color: AppColors.darkPrimaryColor,), ],
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => MyPropertyList()));
                 }),
           ),
           SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Recently Property",
-              style: TextStyle(fontSize: 22),
-            ),
-          ),
-          SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Card(
-              color: AppColors.lightPrimaryColor,
-              elevation: 1,
-              child: Row(
-                children: [
-                  Container(
-                    child: Image.asset(AppAssets.appLogo),
-                    height: 80,
-                    width: 120,
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CardList(),
-          ),
-          SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CardList(),
-          )
+
+
         ],
       ),
     );
@@ -244,3 +208,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

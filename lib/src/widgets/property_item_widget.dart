@@ -20,7 +20,6 @@ class PropertyItemWidget extends StatelessWidget {
           elevation: 1,
           child: Row(
             children: [
-              Text(property.title),
               Container(
                 child: Image.asset(AppAssets.appLogo),
                 height: 80,
@@ -29,7 +28,9 @@ class PropertyItemWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6.0),
                 ),
-              )
+              ),
+              Text(property.title,style: TextStyle(color: AppColors.darkPrimaryColor),),
+
             ],
           ),
         ),

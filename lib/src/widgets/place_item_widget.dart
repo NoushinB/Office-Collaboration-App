@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mulki_zerin/core/app_colors.dart';
 import 'package:mulki_zerin/src/models/place/place_list_item_model.dart';
 
 class PlaceItemWidget extends StatelessWidget {
@@ -10,6 +11,7 @@ class PlaceItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       margin: EdgeInsets.symmetric(horizontal: 4, vertical: 0),
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -28,7 +30,7 @@ class PlaceItemWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(place.name ?? "", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                          Text(place.name ?? "", style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.darkPrimaryColor)),
                         ],
                       ),
                     ),
