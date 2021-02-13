@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mulki_zerin/src/enums/enums.dart';
-import 'package:mulki_zerin/src/pages/map/map_sample.dart';
+import 'package:mulki_zerin/src/pages/splash/splash_screen.dart';
 import 'package:mulki_zerin/src/utils/connectivity_service.dart';
 import 'package:provider/provider.dart';
 import 'core/app_colors.dart';
@@ -13,15 +13,16 @@ class MyApp extends StatelessWidget {
     return StreamProvider<ConnectivityStatus>(
       create: (context) => ConnectivityService().connectionStatusController.stream,
       child: MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Mulki Zerin',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Roboto',
         primaryColor: AppColors.primaryColor,
         accentColor: AppColors.secondaryColor,
         primarySwatch: generateMaterialColor(AppColors.primaryColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MapSample(),
+      home: SplashScreen(),
     ));
   }
 

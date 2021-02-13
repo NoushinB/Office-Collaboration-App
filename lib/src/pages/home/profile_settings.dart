@@ -39,7 +39,6 @@ class _ProfileSettingState extends State<ProfileSetting> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      isMaterialAppTheme: true,
       data: ThemeData(
         brightness: _getBrightness(),
       ),
@@ -91,12 +90,9 @@ class _ProfileSettingState extends State<ProfileSetting> {
                       leading: CircleAvatar(
                         radius: 25.0,
                         backgroundImage: NetworkImage(currentUser != null ? currentUser.avatarUrl : ""),
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: AppColors.lightPrimaryColor,
                       ),
-                      trailing: Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                      ),
+
                     ),
                   ),
                   const SizedBox(height: 10.0),
@@ -144,11 +140,11 @@ class _ProfileSettingState extends State<ProfileSetting> {
                         _buildDivider(),
                         ListTile(
                           leading: Icon(
-                            Icons.location_on,
+                            Icons.email,
                             color: AppColors.darkPrimaryColor,
                           ),
                           title: Text(
-                            "Change Location",
+                            "Email",
                             style: TextStyle(color: AppColors.darkPrimaryColor),
                           ),
                           trailing: Icon(
@@ -175,16 +171,10 @@ class _ProfileSettingState extends State<ProfileSetting> {
                     activeColor: AppColors.darkPrimaryColor,
                     contentPadding: const EdgeInsets.all(0),
                     value: true,
-                    title: Text("Received notification"),
+                    title: Text("Received notification",style: TextStyle(color: AppColors.darkPrimaryColor),),
                     onChanged: (val) {},
                   ),
-                  SwitchListTile(
-                    activeColor: AppColors.darkPrimaryColor,
-                    contentPadding: const EdgeInsets.all(0),
-                    value: false,
-                    title: Text("Received newsletter"),
-                    onChanged: null,
-                  ),
+
                   const SizedBox(height: 60.0),
                 ],
               ),

@@ -21,7 +21,7 @@ class NoItemFound extends StatelessWidget {
           children: <Widget>[
             Icon(Icons.search, size: 96, color: Colors.grey),
             SizedBox(height: 5),
-            Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black54)),
+            Text(title ?? "", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black54)),
             Text(desc ?? "", style: TextStyle(fontSize: 12, color: Colors.grey)),
             SizedBox(height: 10),
             _makeActionButton(),

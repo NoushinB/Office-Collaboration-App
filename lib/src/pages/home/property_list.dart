@@ -10,6 +10,8 @@ import 'package:mulki_zerin/src/bloc/events/property_event.dart';
 import 'package:mulki_zerin/src/bloc/states/property/property_list_state.dart';
 import 'package:mulki_zerin/src/di/get_it_service_locator.dart';
 import 'package:mulki_zerin/src/models/property/property_filter_model.dart';
+import 'package:mulki_zerin/src/pages/home/filter_Page.dart';
+import 'package:mulki_zerin/src/pages/home/search_page.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/bottom_loader.dart';
 import 'package:mulki_zerin/src/widgets/exception_view.dart';
@@ -67,6 +69,7 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
+
         iconTheme: IconThemeData(color: AppColors.darkPrimaryColor),
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -74,6 +77,9 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
           "My Properties",
           style: TextStyle(color: AppColors.darkPrimaryColor),
         ),
+        actions: [IconButton( icon: const Icon(Icons.filter_alt), onPressed: (){ Navigator.push(context,
+            MaterialPageRoute(builder: (context) => FilterPage()));})],
+        
       ),
       body: Container(
         key: key,
@@ -95,7 +101,7 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
                   if (state.properties.isEmpty) {
                     return NoItemFound(
                       assetImage: 'assets/images/png/placeholder.png',
-                      title: Text("have_not_place_any_Property"),
+                      title: "Have Not Place Any Property",
                       showActionButton: false,
                       imageSize: 200.0,
                     );
