@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:mulki_zerin/core/app_colors.dart';
 
 class BusyIndicator extends StatelessWidget {
   final Color color;

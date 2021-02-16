@@ -9,7 +9,7 @@ import 'package:mulki_zerin/src/pages/home/search_page.dart';
 import 'package:mulki_zerin/src/pages/map/map_sample.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/button/primary_button.dart';
-import 'package:mulki_zerin/src/widgets/button/search-button.dart';
+import 'package:mulki_zerin/src/widgets/button/search_button.dart';
 import 'package:mulki_zerin/src/widgets/button/secondary_button.dart';
 
 import '../property/add_new_property.dart';
@@ -138,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => MapSample()));
                         },
                         color: AppColors.lightPrimaryColor,
-                        icon: Icons.map,
+                      icon: Icons.map,
                         title: "Map",
 
                       ),

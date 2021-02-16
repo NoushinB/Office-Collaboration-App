@@ -10,8 +10,7 @@ import 'package:mulki_zerin/src/bloc/events/property_event.dart';
 import 'package:mulki_zerin/src/bloc/states/property/property_list_state.dart';
 import 'package:mulki_zerin/src/di/get_it_service_locator.dart';
 import 'package:mulki_zerin/src/models/property/property_filter_model.dart';
-import 'package:mulki_zerin/src/pages/home/filter_Page.dart';
-import 'package:mulki_zerin/src/pages/home/search_page.dart';
+import 'package:mulki_zerin/src/pages/filter/filter_page.dart';
 import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 import 'package:mulki_zerin/src/widgets/bottom_loader.dart';
 import 'package:mulki_zerin/src/widgets/exception_view.dart';
@@ -28,7 +27,8 @@ class MyPropertyList extends StatefulWidget {
   _MyPropertyListState createState() => _MyPropertyListState();
 }
 
-class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStateMixin {
+class _MyPropertyListState extends State<MyPropertyList>
+    with TickerProviderStateMixin {
   Key key = UniqueKey();
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _scrollController = ScrollController();
@@ -45,7 +45,8 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
 
   @override
   void initState() {
-    _animationController = AnimationController(duration: Duration(milliseconds: 1000), vsync: this);
+    _animationController = AnimationController(
+        duration: Duration(milliseconds: 1000), vsync: this);
     _propertyListBloc = getIt.get<PropertyListBloc>();
     super.initState();
     _fetchInitData();
@@ -55,7 +56,8 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
     try {
       _storageService = await LocalStorageService.getInstance();
       var accessToken = _storageService.accessToken;
-      _propertyListBloc.add(FetchPropertiesList(accessToken, PropertyFilterModel()));
+      _propertyListBloc
+          .add(FetchPropertiesList(accessToken, PropertyFilterModel()));
     } catch (e) {
       Fluttertoast.showToast(msg: e);
     }
@@ -69,7 +71,6 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
-
         iconTheme: IconThemeData(color: AppColors.darkPrimaryColor),
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -77,9 +78,14 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
           "My Properties",
           style: TextStyle(color: AppColors.darkPrimaryColor),
         ),
-        actions: [IconButton( icon: const Icon(Icons.filter_alt), onPressed: (){ Navigator.push(context,
-            MaterialPageRoute(builder: (context) => FilterPage()));})],
-        
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.filter_alt),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FilterPage()));
+              })
+        ],
       ),
       body: Container(
         key: key,
@@ -92,7 +98,9 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
               bloc: _propertyListBloc,
               builder: (BuildContext context, PropertyListState state) {
                 if (state is PropertyListUninitialized) {
-                  return Center(child: SpinKitThreeBounce(size: 32, color: Theme.of(context).accentColor));
+                  return Center(
+                      child: SpinKitThreeBounce(
+                          size: 32, color: Theme.of(context).accentColor));
                 }
                 if (state is PropertyListError) {
                   return ExceptionView(state.exception);
@@ -116,7 +124,8 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
                         var animation = Tween(begin: 0.0, end: 1.0).animate(
                           CurvedAnimation(
                             parent: _animationController,
-                            curve: Interval((1 / count) * index, 1.0, curve: Curves.fastOutSlowIn),
+                            curve: Interval((1 / count) * index, 1.0,
+                                curve: Curves.fastOutSlowIn),
                           ),
                         );
                         _animationController.forward();
@@ -126,7 +135,8 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
                             return FadeTransition(
                               opacity: animation,
                               child: new Transform(
-                                transform: new Matrix4.translationValues(0.0, 50 * (1.0 - animation.value), 0.0),
+                                transform: new Matrix4.translationValues(
+                                    0.0, 50 * (1.0 - animation.value), 0.0),
                                 child: PropertyItemWidget(property),
                               ),
                             );
@@ -134,7 +144,9 @@ class _MyPropertyListState extends State<MyPropertyList> with TickerProviderStat
                         );
                       }
                     },
-                    itemCount: state.hasReachedMax ? state.properties.length : state.properties.length + 1,
+                    itemCount: state.hasReachedMax
+                        ? state.properties.length
+                        : state.properties.length + 1,
                     controller: _scrollController,
                   );
                 }
