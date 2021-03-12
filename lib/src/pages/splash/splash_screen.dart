@@ -6,6 +6,7 @@ import 'package:mulki_zerin/core/app_asstes.dart';
 import 'package:mulki_zerin/core/app_colors.dart';
 import 'package:mulki_zerin/src/pages/home/home_page.dart';
 import 'package:mulki_zerin/src/pages/login/login_page.dart';
+import 'package:mulki_zerin/src/utils/local_storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,10 +14,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  LocalStorageService _storageService;
+
   @override
   void initState() {
     super.initState();
     startTimer();
+    _fetchInitData();
+  }
+
+  _fetchInitData() async {
+    try {
+      _storageService = await LocalStorageService.getInstance();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -34,34 +46,32 @@ class _SplashScreenState extends State<SplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Card(
-                      elevation:0,
+                      elevation: 0,
                       child: Center(
                         child: Container(
                           height: height / 4,
                           decoration: BoxDecoration(
-
                               shape: BoxShape.circle,
-                           border: Border.all(color: AppColors.darkPrimaryColor)
-
-                          ),
+                              border: Border.all(
+                                  color: AppColors.darkPrimaryColor)),
                           width: MediaQuery.of(context).size.width,
-                          child:Center(
+                          child: Center(
                             child: ClipRRect(
-                              borderRadius:
-                              BorderRadius.circular(60),
-                              child: Image.asset(AppAssets.appLogo,width: 150,height: 150,),
+                              borderRadius: BorderRadius.circular(60),
+                              child: Image.asset(
+                                AppAssets.appLogo,
+                                width: 150,
+                                height: 150,
+                              ),
                             ),
                           ),
-
-
-
-                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 24),
                     Text("Mulki Zerin",
                         style: TextStyle(
-                          fontFamily: 'Blkchtry',
+                            fontFamily: 'Blkchtry',
                             color: AppColors.darkPrimaryColor,
                             fontSize: 32,
                             fontWeight: FontWeight.bold))
@@ -82,15 +92,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startTimer() async {
     debugPrint("Timer started");
-    var _duration = new Duration(seconds:3);
+    var _duration = new Duration(seconds: 3);
     return new Timer(_duration, navigateToMainPage);
   }
 
   Future<void> navigateToMainPage() async {
     debugPrint("Timer completed");
+    if (_storageService != null) {
+      if (_storageService.currentUser != null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MyHomePage()));
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+      }
+    }
     // var screenHeight = MediaQuery.of(context).size.height;
     //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardPage(screenHeight: screenHeight)));
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => MyHomePage()));
   }
 }
